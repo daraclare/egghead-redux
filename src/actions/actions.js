@@ -9,37 +9,31 @@ export const API_ERROR = "API_ERROR";
 export const TODO = "TODO";
 
 //define action for todo list
-export function todo(text, id) {
+export const todo = (text, id) => {
   return {
     type: TODO,
-    payload: {
-      text,
-      id
-    }
+    text,
+    id
   };
-}
+};
 
 // define action for increment
-export function increment(counter = 1) {
+export const increment = (counter = 1) => {
   return {
     type: INCREMENT,
-    payload: {
-      counter
-    }
+    counter
   };
-}
+};
 
 // define action for decrement
-export function decrement(counter = 1) {
+export const decrement = (counter = 1) => {
   return {
     type: DECREMENT,
-    payload: {
-      counter
-    }
+    counter
   };
-}
+};
 
-export function fetchApiData(url) {
+export const fetchApiData = url => {
   return dispatch => {
     axios
       .get(url)
@@ -47,18 +41,14 @@ export function fetchApiData(url) {
       .then(apiData => {
         dispatch({
           type: FETCH_API,
-          payload: {
-            apiData
-          }
+          apiData
         });
       })
       .catch(error => {
         dispatch({
           type: API_ERROR,
-          payload: {
-            error
-          }
+          error
         });
       });
   };
-}
+};

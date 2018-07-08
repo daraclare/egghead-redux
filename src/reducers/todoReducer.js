@@ -6,8 +6,8 @@ export default function todoReducer(state = [], action) {
       return [
         ...state,
         {
-          id: action.payload.id,
-          text: action.payload.text,
+          id: action.id,
+          text: action.text,
           completed: false
         }
       ];
