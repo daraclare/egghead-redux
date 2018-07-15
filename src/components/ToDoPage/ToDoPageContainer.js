@@ -3,13 +3,15 @@ import ToDoPage from "./ToDoPage.js";
 import * as Actions from "../../actions/actions";
 
 function mapStateToProps(state) {
+  console.log("state", state.todos);
   return {
-    todoReducer: state.todoReducer
+    todos: state.todos
   };
 }
 
 const mapDispatchToProps = {
-  todo: Actions.todo
+  addToDo: Actions.addToDo,
+  toggleToDo: Actions.toggleToDo
 };
 
 export default connect(

@@ -6,14 +6,32 @@ export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 export const FETCH_API = "FETCH_API";
 export const API_ERROR = "API_ERROR";
-export const TODO = "TODO";
+export const ADD_TODO = "ADD_TODO";
+export const TOGGLE_TODO = "TOGGLE_TODO";
+export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 
 //define action for todo list
-export const todo = (text, id) => {
+let nextTodoId = 0;
+
+export const addToDo = text => {
   return {
-    type: TODO,
+    type: ADD_TODO,
     text,
+    id: nextTodoId++
+  };
+};
+
+export const toggleToDo = id => {
+  return {
+    type: TOGGLE_TODO,
     id
+  };
+};
+
+export const visibilityFilter = () => {
+  return {
+    type: SET_VISIBILITY_FILTER,
+    filter: "SHOW_COMPLETED"
   };
 };
 

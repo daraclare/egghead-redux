@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import "./todoPage.css";
 
 export default class ToDoPage extends Component {
   constructor() {
     super();
 
-    this.state = { value: "" };
+    this.state = {
+      value: ""
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleChange(event) {
@@ -16,17 +20,31 @@ export default class ToDoPage extends Component {
   }
 
   handleSubmit(event) {
-    console.log("this.props", this.props);
-    this.props.todo(this.state.value, 1);
+    this.props.addToDo(this.state.value);
     event.preventDefault();
+  }
+
+  handleToggle(event) {
+    const id = event.target.dataset.id;
+    this.props.toggleToDo(id);
   }
 
   render() {
     return (
       <div>
         <div>
-          {this.props.todoReducer.map((item, index) => {
-            return <h4 key={index}>{item.text}</h4>;
+          {this.props.todos.map((item, index) => {
+            let completedClass = item.completed ? "completedClass" : "";
+            return (
+              <div key={index}>
+                <h4 className={completedClass}>
+                  {item.text + ""}
+                  <button data-id={item.id} onClick={this.handleToggle}>
+                    COMPLETE
+                  </button>
+                </h4>
+              </div>
+            );
           })}
         </div>
         <form onSubmit={this.handleSubmit}>
@@ -46,6 +64,7 @@ export default class ToDoPage extends Component {
 }
 
 ToDoPage.propTypes = {
-  todoReducer: PropTypes.array,
-  todo: PropTypes.func
+  todos: PropTypes.array,
+  addToDo: PropTypes.func,
+  toggleToDo: PropTypes.func
 };

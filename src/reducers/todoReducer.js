@@ -1,8 +1,8 @@
 import * as types from "../actions/actions.js";
 
-export default function todoReducer(state = [], action) {
+export default function todos(state = [], action) {
   switch (action.type) {
-    case types.TODO:
+    case types.ADD_TODO:
       return [
         ...state,
         {
@@ -11,6 +11,14 @@ export default function todoReducer(state = [], action) {
           completed: false
         }
       ];
+    case types.TOGGLE_TODO:
+      return state.map(todo => {
+        console.log("todo.id", todo.id);
+        console.log("action.id", action.id);
+        return todo.id == action.id
+          ? { ...todo, completed: !todo.completed }
+          : todo;
+      });
     default:
       return state;
   }
