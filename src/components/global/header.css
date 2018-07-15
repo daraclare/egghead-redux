@@ -1,0 +1,15 @@
+header {
+  padding: 1rem;
+  background-color: darkmagenta;
+  color: magenta;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+}
+
+a:hover {
+  color: rgba(white, 0.85);
+}

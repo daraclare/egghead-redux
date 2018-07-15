@@ -1,4 +1,47 @@
+.todos-container {
+  width: 40vh;
+  margin: 0 auto;
+}
+
 .completedClass {
   text-decoration: line-through;
   opacity: 0.75;
+}
+
+.todoItem {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  text-align: left;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.todoItem:hover {
+  background: rgba(black, 0.025);
+}
+
+.todos-container form {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.submitBtn {
+  background: darkmagenta;
+  color: white;
+  font-size: smaller;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border: 1px solid darkmagenta;
+  border-radius: 6px;
+  margin-left: 5px;
+  padding: 3px 6px;
+}
+
+:focus {
+  outline: none;
+}
+
+.deleteBtn {
+  border: none;
+  background: none;
 }

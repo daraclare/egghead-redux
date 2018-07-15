@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import "./todoPage.css";
 
@@ -20,7 +20,8 @@ export default class ToDoPage extends Component {
   }
 
   handleSubmit(event) {
-    this.props.addToDo(this.state.value);
+    this.state.value && this.props.addToDo(this.state.value);
+    this.setState({ value: "" });
     event.preventDefault();
   }
 
@@ -31,32 +32,34 @@ export default class ToDoPage extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          {this.props.todos.map((item, index) => {
-            let completedClass = item.completed ? "completedClass" : "";
-            return (
-              <div key={index}>
-                <h4 className={completedClass}>
-                  {item.text + ""}
-                  <button data-id={item.id} onClick={this.handleToggle}>
-                    COMPLETE
-                  </button>
-                </h4>
-              </div>
-            );
-          })}
-        </div>
+      <div className="todos-container">
+        {this.props.todos.map((item, index) => {
+          const completedClass = item.completed ? "completedClass" : "";
+          const checked = item.completed;
+          return (
+            <div className="todoItem" key={index}>
+              <input
+                data-id={item.id}
+                onClick={this.handleToggle}
+                type="checkbox"
+                checked={checked}
+              />
+              <p className={completedClass}>{item.text + ""}</p>
+              <button className="deleteBtn">x</button>
+            </div>
+          );
+        })}
+
         <form onSubmit={this.handleSubmit}>
           <label>
-            Todo:
             <input
               type="text"
               value={this.state.value}
               onChange={this.handleChange}
+              placeholder="Add a to do …"
             />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Add To do" className="submitBtn" />
         </form>
       </div>
     );
