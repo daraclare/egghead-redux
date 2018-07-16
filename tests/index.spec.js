@@ -1,17 +1,14 @@
 /* eslint-disable no-var */
 
-// import React from "react";
-// import HomePage from "../src/components/HomePage/HomePage.js";
 import expect from "expect";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import deepFreeze from "deep-freeze";
 import todos from "../src/reducers/todoReducer.js";
-// import * as types from "../src/actions/actions.js";
 
 configure({ adapter: new Adapter() });
 
-describe("HomePage tag test", () => {
+describe("To do functionality test", () => {
   it("tests toggleToDo", () => {
     const stateBefore = [
       {
@@ -49,7 +46,7 @@ describe("HomePage tag test", () => {
     expect(todos(stateBefore, toggleToDoAction)).toEqual(stateAfter);
   });
 
-  it("test addToDo", () => {
+  it("test adding a to do", () => {
     const stateBefore = [];
     const addToDoAction = {
       type: "ADD_TODO",
@@ -69,5 +66,35 @@ describe("HomePage tag test", () => {
     deepFreeze(addToDoAction);
 
     expect(todos(stateBefore, addToDoAction)).toEqual(stateAfter);
+  });
+
+  it("tests deleting a to do", () => {
+    const stateBefore = [
+      {
+        id: 0,
+        text: "Learn Redux",
+        completed: false
+      },
+      {
+        id: 1,
+        text: "Go Shopping",
+        completed: false
+      }
+    ];
+
+    const stateAfter = [
+      {
+        id: 0,
+        text: "Learn Redux",
+        completed: false
+      }
+    ];
+
+    const deleteToDo = {
+      type: "DELETE_TODO",
+      id: 1
+    };
+
+    expect(todos(stateBefore, deleteToDo)).toEqual(stateAfter);
   });
 });

@@ -1,17 +1,17 @@
 import { connect } from "react-redux";
 import ToDoPage from "./ToDoPage.js";
-import * as Actions from "../../actions/actions";
+import * as actions from "../../actions/actions";
 
-function mapStateToProps(state) {
-  console.log("state", state.todos);
+const mapStateToProps = state => {
   return {
     todos: state.todos
   };
-}
+};
 
 const mapDispatchToProps = {
-  addToDo: Actions.addToDo,
-  toggleToDo: Actions.toggleToDo
+  addToDo: actions.addToDo,
+  toggleToDo: actions.toggleToDo,
+  deleteToDo: actions.deleteToDo
 };
 
 export default connect(

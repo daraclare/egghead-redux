@@ -13,11 +13,14 @@ export default function todos(state = [], action) {
       ];
     case types.TOGGLE_TODO:
       return state.map(todo => {
-        console.log("todo.id", todo.id);
-        console.log("action.id", action.id);
-        return todo.id == action.id
+        return todo.id === action.id
           ? { ...todo, completed: !todo.completed }
           : todo;
+      });
+
+    case types.DELETE_TODO:
+      return state.filter(todo => {
+        return todo.id !== action.id;
       });
     default:
       return state;

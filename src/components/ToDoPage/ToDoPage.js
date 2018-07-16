@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./todoPage.css";
 
@@ -13,6 +13,7 @@ export default class ToDoPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange(event) {
@@ -26,8 +27,13 @@ export default class ToDoPage extends Component {
   }
 
   handleToggle(event) {
-    const id = event.target.dataset.id;
+    const id = Number(event.target.dataset.id);
     this.props.toggleToDo(id);
+  }
+
+  handleDelete(event) {
+    const id = Number(event.target.dataset.id);
+    this.props.deleteToDo(id);
   }
 
   render() {
@@ -40,12 +46,18 @@ export default class ToDoPage extends Component {
             <div className="todoItem" key={index}>
               <input
                 data-id={item.id}
-                onClick={this.handleToggle}
+                onChange={this.handleToggle}
                 type="checkbox"
                 checked={checked}
               />
               <p className={completedClass}>{item.text + ""}</p>
-              <button className="deleteBtn">x</button>
+              <button
+                data-id={item.id}
+                onClick={this.handleDelete}
+                className="deleteBtn"
+              >
+                x
+              </button>
             </div>
           );
         })}
@@ -67,7 +79,8 @@ export default class ToDoPage extends Component {
 }
 
 ToDoPage.propTypes = {
-  todos: PropTypes.array,
-  addToDo: PropTypes.func,
-  toggleToDo: PropTypes.func
+  todos: PropTypes.array.isRequired,
+  addToDo: PropTypes.func.isRequired,
+  toggleToDo: PropTypes.func.isRequired,
+  deleteToDo: PropTypes.func.isRequired
 };
